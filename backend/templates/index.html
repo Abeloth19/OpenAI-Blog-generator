@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-6">
+        <h1 class="text-4xl mb-6 font-bold">Generate Blog</h1>
+
+        <form id="blogForm" method="POST" action="/generate_blog">
+            <div class="flex mb-4">
+                <div class="w-1/4">
+                    <label for="tone" class="block font-bold">Tone:</label>
+                </div>
+                <div class="w-3/4">
+                    <select name="tone" id="tone" class="block w-full border-gray-300 rounded p-2">
+                        <option value="friendly">Friendly</option>
+                        <option value="casual">Casual</option>
+                        <option value="formal">Formal</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex mb-4">
+                <div class="w-1/4">
+                    <label for="title" class="block font-bold">Title:</label>
+                </div>
+                <div class="w-3/4">
+                    <input type="text" name="title" id="title" class="block w-full border-gray-300 rounded p-2" required>
+                </div>
+            </div>
+
+            <div class="flex mb-4">
+                <div class="w-1/4">
+                    <label for="keywords" class="block font-bold">Keywords:</label>
+                </div>
+                <div class="w-3/4">
+                    <input type="text" name="keywords" id="keywords" class="block w-full border-gray-300 rounded p-2" required>
+                </div>
+            </div>
+
+            <div class="flex mb-4">
+                <div class="w-1/4"></div>
+                <div class="w-3/4">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Generate</button>
+                    <button type="button" onclick="goBack()" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Go Back</button>
+                </div>
+            </div>
+        </form>
+
+        <h2 class="text-2xl mt-6">Generated Blog:</h2>
+        <div id="generatedBlog" class="bg-gray-200 border-gray-300 rounded p-2 mt-2" contenteditable="true">
+            
+                {{ blog|safe }}
+           
+        </div>
+
+        <div class="mt-4">
+            <button onclick="editText()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit Text</button>
+            <button onclick="copyText()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Copy Text</button>
+            <button onclick="uploadImage()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Upload Image</button>
+        </div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        function editText() {
+            const generatedBlog = document.getElementById("generatedBlog");
+            generatedBlog.contentEditable = true;
+            generatedBlog.focus();
+        }
+
+        function copyText() {
+            const generatedBlog = document.getElementById("generatedBlog");
+            const range = document.createRange();
+            range.selectNode(generatedBlog);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+            alert("Text copied to clipboard!");
+        }
+
+        function uploadImage() {
+            const imageUrl = prompt("Enter the image URL:");
+            if (imageUrl) {
+                const img = document.createElement("img");
+                img.src = imageUrl;
+                img.classList.add("mt-2");
+                document.getElementById("generatedBlog").appendChild(img);
+            }
+        }
+    </script>
+</body>
+</html>
