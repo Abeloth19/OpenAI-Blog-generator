@@ -10,7 +10,7 @@ openai.api_key ="PUT_YOUR_API_KEY_HERE"
 def index():
     return render_template('index.html')
 
-# Define the route for generating a blog
+
 @app.route('/generate_blog', methods=['POST'])
 def generate_blog():
     data = request.form
@@ -19,7 +19,7 @@ def generate_blog():
     keywords = data['keywords']
     prompt = f"Tone: {tone}\nTitle: {title}\nKeywords: {keywords}\n\nGenerate a blog on the given topic:"
 
-    # Use the OpenAI API to generate the blog content
+  
     response = openai.Completion.create(
         model="text-davinci-003",
         prompt=prompt,
@@ -32,7 +32,7 @@ def generate_blog():
 
     generated_content = response.choices[0].text.strip()
 
-    # Return the generated blog content as a response
+   
    
     return render_template('index.html', blog=generated_content)
 
