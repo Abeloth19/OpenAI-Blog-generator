@@ -1,5 +1,5 @@
 
-# Ai Blog Cretor
+# Ai Blog Creator
 
 Put your OPENAI API key to generate the blogs.
 
