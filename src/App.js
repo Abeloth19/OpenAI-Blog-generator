@@ -76,7 +76,7 @@ const App = () => {
       
       {/* Recommended Topics */}
       <div className="bg-[#E9EAEC] p-4 mb-1">
-        <h3 className="text-black text-xl font-bold">RECOMMENDED TOPIC</h3>
+        <h3 className="text-black text-xl font-bold">Recommended Topic</h3>
       </div>
 
       <AddTopics
@@ -90,7 +90,7 @@ const App = () => {
 
       {showModal && (
       <div className="fixed inset-0 flex items-center justify-center z-10">
-        <div className="bg-white w-[1240px] h-[500px] rounded-lg p-8 border border-2 border-black">
+        <div className="bg-white w-[1240px] h-[500px] rounded-lg p-8 border-2 border-black">
           <h3 className="mb-4 text-2xl font-extrabold">Add Topic</h3>
           <div className="mb-4">
             <label className="block mb-2 font-bold" htmlFor="topicName">
